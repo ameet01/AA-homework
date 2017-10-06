@@ -16,3 +16,27 @@ class Stack
     @stack
   end
 end
+
+class Queue
+  def initialize
+    @queue = Array.new
+  end
+
+  def enqueue(el)
+    @queue.push(el)
+    el
+  end
+
+  def dequeue
+    @queue.shift
+  end
+
+  def show
+    @queue
+  end
+end
+
+
+class Map
+
+end
