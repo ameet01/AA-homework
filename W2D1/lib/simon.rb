@@ -16,6 +16,7 @@ class Simon
     if @game_over
       game_over_message
       reset_game
+      self.play
     end
   end
 
@@ -29,22 +30,18 @@ class Simon
   end
 
   def show_sequence
+    puts ""
+    puts ""
     add_random_color
     p @seq
   end
 
   def require_sequence
-    hash = {
-      'red' => 'r',
-      'blue' => 'b',
-      'green' => 'g',
-      'yellow' => 'y'
-    }
     puts 'Please enter sequence (rbgy):'
     guess = gets.chomp
 
     guess.split('').each_with_index do |letter, index|
-      if letter != hash[@seq[index]] || (guess.length != @seq.length)
+      if letter != @seq[index][0]|| (guess.length != @seq.length)
         @game_over = true
       end
     end
@@ -55,10 +52,13 @@ class Simon
   end
 
   def round_success_message
-    p 'Correct!'
+    puts ""
+    puts 'Correct!'
   end
 
   def game_over_message
+    puts ""
+    puts ""
     p 'The game is over'
   end
 
