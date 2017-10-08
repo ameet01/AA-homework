@@ -9,10 +9,6 @@ class Simon
     @seq = Array.new()
   end
 
-  def win?
-    @sequence_length == 5
-  end
-
   def play
     commence_game
     until @game_over == true
@@ -21,6 +17,7 @@ class Simon
     if @game_over
       game_over_message
       reset_game
+      puts ""
       puts 'Would you like to play again? (y/n)'
       input = gets.chomp
       self.play if input == 'y'
@@ -86,11 +83,8 @@ class Simon
   def game_over_message
     puts ""
     puts ""
-    if win?
-      p 'The game is over. You win.'
-    else
-      p 'Wrong answer. You lose the game.'
-    end
+    p 'Wrong answer. You lose the game.'
+    p 'Your sequence total was ' + @sequence_length.to_s
   end
 
   def reset_game
