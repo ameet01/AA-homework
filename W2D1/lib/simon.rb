@@ -9,31 +9,58 @@ class Simon
     @seq = Array.new()
   end
 
+  def win?
+    @sequence_length == 5
+  end
+
   def play
+    commence_game
     until @game_over == true
       take_turn
     end
     if @game_over
       game_over_message
       reset_game
-      self.play
+      puts 'Would you like to play again? (y/n)'
+      input = gets.chomp
+      self.play if input == 'y'
     end
+  end
+
+  def commence_game
+    system('clear')
+    puts 'Welcome to Simon!'
+    puts "THE GAME IS STARTING IN 3..."
+    sleep 1.00
+    puts '2...'
+    sleep 1.00
+    puts '1...'
+    sleep 1.00
+    puts 'NOW!'
+    sleep 1.00
   end
 
   def take_turn
     show_sequence
     require_sequence
-    if !game_over
+    if !@game_over
       round_success_message
       @sequence_length += 1
     end
   end
 
   def show_sequence
-    puts ""
-    puts ""
+    system("clear")
+    puts "SEQUENCE:"
     add_random_color
-    p @seq
+    @seq.each do |i|
+      system("clear")
+      sleep 0.55
+      puts i
+      sleep 0.70
+      system("clear")
+      sleep 0.55
+    end
   end
 
   def require_sequence
@@ -41,7 +68,7 @@ class Simon
     guess = gets.chomp
 
     guess.split('').each_with_index do |letter, index|
-      if letter != @seq[index][0]|| (guess.length != @seq.length)
+      if (guess.length != @seq.length) || letter != @seq[index][0]
         @game_over = true
       end
     end
@@ -59,7 +86,11 @@ class Simon
   def game_over_message
     puts ""
     puts ""
-    p 'The game is over'
+    if win?
+      p 'The game is over. You win.'
+    else
+      p 'Wrong answer. You lose the game.'
+    end
   end
 
   def reset_game
