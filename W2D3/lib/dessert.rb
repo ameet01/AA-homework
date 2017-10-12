@@ -37,3 +37,10 @@ class Dessert
     @chef.bake(self)
   end
 end
+
+
+class Robot
+  def valid_walk?(string)
+    true
+  end
+end
