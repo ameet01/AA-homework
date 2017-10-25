@@ -21,7 +21,7 @@ body {
 
 .header-nav {
   width: 900px;
-  border-left: 1px solid gray;
-  border-right: 1px solid gray;
+  border-left: 1px solid lightgray;
+  border-right: 1px solid lightgray;
   margin: auto;
 }
