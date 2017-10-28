@@ -1,17 +1,19 @@
 require 'rails_helper'
-require 'factory_bot'
-FactoryBot.find_definitions
 
 describe User do
+  FactoryGirl.define do
+    factory :user do
+    end
+  end
   subject(:user) do
-    FactoryBot.build(:user,
-      email: "jonathan@fakesite.com",
-      password: "good_password")
+    FactoryGirl.build(:user,
+      email: "ameet@gmail.com",
+      password: "password")
   end
 
     it { should validate_presence_of(:email) }
     it { should validate_presence_of(:password_digest) }
-    it { should validate_length_of(:password).it_at_least(6) }
+    it { should validate_length_of(:password).is_at_least(6) }
 
     it 'creates a password digest when a password is given' do
       expect(user.password_digest).to_not be_nil
@@ -34,23 +36,23 @@ describe User do
       end
     end
 
-    describe "is_password?" do
+    describe "valid_password?" do
       it 'verifies that a password is right' do
-        expect(user.is_password?('pw')).to be true
+        expect(user.valid_password?('password')).to be true
       end
 
       it 'verifies that a password is not correct' do
-        expect(user.is_password?('password')).to be false
+        expect(user.valid_password?('pw')).to be false
       end
     end
 
     describe '#find_by_credentials' do
       it 'finds and returns the user given good input' do
-        expect(User.find_by_credentials("ameet@gmail.com", "pw")).eq(user)
+        expect(User.find_by_credentials("ameet@gmail.com", "password")).to eq(user)
       end
 
       it 'returns nil for bad input' do
-        expect(User.find_by_credentials("ameet01@gmail.com", "password")).to eq(nil)
+        expect(User.find_by_credentials("ameet01@gmail.com", "pw")).to eq(nil)
       end
     end
 end
