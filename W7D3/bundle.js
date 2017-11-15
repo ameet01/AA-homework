@@ -6944,11 +6944,25 @@ if (process.env.NODE_ENV !== 'production' && typeof isCrushed.name === 'string' 
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.receiveSearchGiphys = exports.RECEIVE_SEARCH_GIPHYS = undefined;
+
 var _api_util = __webpack_require__(115);
 
 var APIUtil = _interopRequireWildcard(_api_util);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+var RECEIVE_SEARCH_GIPHYS = exports.RECEIVE_SEARCH_GIPHYS = 'RECEIVE_SEARCH_GIPHYS';
+
+var receiveSearchGiphys = exports.receiveSearchGiphys = function receiveSearchGiphys(giphys) {
+  return {
+    type: RECEIVE_SEARCH_GIPHYS,
+    giphys: giphys
+  };
+};
 
 /***/ }),
 /* 59 */
@@ -12053,6 +12067,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _redux = __webpack_require__(57);
 
 var _reduxThunk = __webpack_require__(210);
@@ -12064,6 +12082,12 @@ var _root_reducer = __webpack_require__(114);
 var _root_reducer2 = _interopRequireDefault(_root_reducer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var configureStore = function configureStore() {
+  return (0, _redux.createStore)(_root_reducer2.default);
+};
+
+exports.default = configureStore;
 
 /***/ }),
 /* 107 */
@@ -12156,7 +12180,19 @@ var _root = __webpack_require__(105);
 
 var _root2 = _interopRequireDefault(_root);
 
+var _api_util = __webpack_require__(115);
+
+var _giphy_actions = __webpack_require__(58);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var store = (0, _store2.default)();
+
+document.addEventListener('DOMContentLoaded', function () {
+  window.store = store;
+  window.fetchSearchGiphys = _api_util.fetchSearchGiphys;
+  window.receiveSearchGiphys = _giphy_actions.receiveSearchGiphys;
+});
 
 /***/ }),
 /* 113 */
@@ -12165,7 +12201,26 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _giphy_actions = __webpack_require__(58);
+
+var giphysReducer = function giphysReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments[1];
+
+  Object.freeze(state);
+  switch (action.type) {
+    case _giphy_actions.RECEIVE_SEARCH_GIPHYS:
+      return action.giphys;
+    default:
+      return state;
+  }
+};
+
+exports.default = giphysReducer;
 
 /***/ }),
 /* 114 */
@@ -12174,6 +12229,10 @@ var _giphy_actions = __webpack_require__(58);
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _redux = __webpack_require__(57);
 
 var _giphys_reducer = __webpack_require__(113);
@@ -12181,6 +12240,10 @@ var _giphys_reducer = __webpack_require__(113);
 var _giphys_reducer2 = _interopRequireDefault(_giphys_reducer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = (0, _redux.combineReducers)({
+  giphys: _giphys_reducer2.default
+});
 
 /***/ }),
 /* 115 */
