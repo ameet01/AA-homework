@@ -1,0 +1,56 @@
+.image {
+  width: 100%;
+}
+
+body {
+    background-image: url("splash.jpg");
+    background-color: #cccccc;
+    font-family: helvetica;
+}
+
+
+.title {
+  text-align: center;
+  color: white;
+  font-size: 80px;
+  text-shadow: rgba(0, 0.5, 0.5, 1);
+  width: 1200px;
+  margin: auto;
+  font-family: serif;
+  margin-top: 400px;
+}
+
+
+.header {
+  display: flex;
+  position: absolute;
+  right: 20px;
+  top: 10px;
+}
+
+.header a {
+  margin-left: 20px;
+  font-size: 25px;
+  font-family: Helvetica;
+  color: white;
+  text-shadow: rgba(0, 0.5, 0.5, 1);
+}
+
+.currentuser {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  font-size: 30px;
+  color: white;
+}
+
+.links {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 25px;
+}
+
+.links a {
+  color: blue;
+}
